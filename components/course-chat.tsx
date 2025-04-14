@@ -334,5 +334,111 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
       const updatedMessages = [...privateMessages, newMessage]
       setPrivateMessages(updatedMessages)
 
-// Save to localStorage
+      // Save to localStorage
+      localStorage.setItem("privateMessages", JSON.stringify(updatedMessages))
+    } 
+  }
+
+  return (
+    <div className="course-chat">
+      <div className="tabs">
+        <button
+          className={`tab ${activeTab === "private" ? "active" : ""}`}
+          onClick={() => setActiveTab("private")}
+        >
+          {t("privateChat")}
+        </button>
+        <button
+          className={`tab ${activeTab === "group" ? "active" : ""}`}
+          onClick={() => setActiveTab("group")}
+        >
+          {t("groupChat")}
+        </button>
+      </div>
+
+      <div className="messages">
+        {activeTab === "private" ? (
+          privateMessages.map((msg) => (
+            <div key={msg.id} className={`message ${msg.sender.isTeacher ? "teacher" : ""}`}>
+              <img src={msg.sender.avatar || "/placeholder.svg?height=40&width=40"} alt={msg.sender.name} />
+              <div className="content">
+                <div className="sender">{msg.sender.name}</div>
+                <div className="text">{msg.content}</div>
+                {msg.type === "voice" && (
+                  <audio controls>
+                    <source src={msg.mediaUrl} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                )}
+                {msg.type === "video" && (
+                  <video controls>
+                    <source src={msg.mediaUrl} type="video/mp4" />
+                    Your browser does not support the video element.
+                  </video>
+                )}
+                {msg.type === "image" && <img src={msg.mediaUrl} alt="Image" />}
+                <div className="timestamp">{new Date(msg.timestamp).toLocaleString()}</div>
+              </div>
+            </div>
+          ))
+        ) : (
+          groupMessages.map((msg) => (
+            <div key={msg.id} className={`message ${msg.sender.isTeacher ? "teacher" : ""}`}>
+              <img src={msg.sender.avatar || "/placeholder.svg?height=40&width=40"} alt={msg.sender.name} />
+              <div className="content">
+                <div className="sender">{msg.sender.name}</div>
+                <div className="text">{msg.content}</div>
+                {msg.type === "voice" && (
+                  <audio controls>
+                    <source src={msg.mediaUrl} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                )}
+                {msg.type === "video" && (
+                  <video controls>
+                    <source src={msg.mediaUrl} type="video/mp4" />
+                    Your browser does not support the video element.
+                  </video>
+                )}
+                {msg.type === "image" && <img src={msg.mediaUrl} alt="Image" />}
+                <div className="timestamp">{new Date(msg.timestamp).toLocaleString()}</div>
+              </div>
+            </div>
+          ))
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      <div className="input">
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={t("typeMessage")}
+        />
+        <button onClick={handleSendMessage}>{t("send")}</button>
+      </div>
+
+      {showTeachingOffer && (
+        <div className="teaching-offer">
+          <h2>{t("teachingOfferTitle")}</h2>
+          <p>{t("teachingOfferDescription")}</p>
+          <button onClick={() => setShowTeachingOffer(false)}>{t("close")}</button>
+        </div>
+      )}
+
+      <div className="report-problem">
+        <textarea
+          value={reportProblem}
+          onChange={(e) => setReportProblem(e.target.value)}
+          placeholder={t("describeProblem")}
+        />
+        <button onClick={handleReportProblem} disabled={isSubmittingReport}>
+          {isSubmittingReport ? t("submitting") : t("submitReport")}
+        </button>
+        {reportSubmitted && <p>{t("reportSubmitted")}</p>}
+      </div>
+    </div>
+  )
+}
 
