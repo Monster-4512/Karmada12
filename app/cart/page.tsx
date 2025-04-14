@@ -399,170 +399,199 @@ export default function CartPage() {
                   <CardDescription>{t("selectPaymentMethod")}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Tabs value={paymentMethod} onValueChange={(value) => setPaymentMethod(value as PaymentMethod)}>
+                    <Tabs
+                    value={paymentMethod}
+                    onValueChange={(value: PaymentMethod) => setPaymentMethod(value)}
+                    >
                     <TabsList className="grid grid-cols-4 mb-4">
                       <TabsTrigger value="card">
-                        <CreditCard className="h-4 w-4 mr-2" />
-                        <span className="hidden sm:inline">{t("card")}</span>
+                      <CreditCard className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">{t("card")}</span>
                       </TabsTrigger>
                       <TabsTrigger value="click">
-                        <img src="/placeholder.svg?height=16&width=16" alt="Click" className="h-4 w-4 mr-2" />
-                        <span className="hidden sm:inline">Click</span>
+                      <img src="/placeholder.svg?height=16&width=16" alt="Click" className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">Click</span>
                       </TabsTrigger>
                       <TabsTrigger value="bank">
-                        <Landmark className="h-4 w-4 mr-2" />
-                        <span className="hidden sm:inline">{t("bank")}</span>
+                      <Landmark className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">{t("bank")}</span>
                       </TabsTrigger>
                       <TabsTrigger value="cash">
-                        <Banknote className="h-4 w-4 mr-2" />
-                        <span className="hidden sm:inline">{t("cash")}</span>
+                      <Banknote className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">{t("cash")}</span>
                       </TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="card" className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="cardNumber">{t("cardNumber")}</Label>
-                        <Input
-                          id="cardNumber"
-                          placeholder="0000 0000 0000 0000"
-                          value={cardNumber}
-                          onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                          maxLength={19}
-                        />
+                      <Label htmlFor="cardNumber">{t("cardNumber")}</Label>
+                      <Input
+                        id="cardNumber"
+                        placeholder="0000 0000 0000 0000"
+                        value={cardNumber}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCardNumber(formatCardNumber(e.target.value))
+                        }
+                        maxLength={19}
+                      />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="expiry">{t("expiryDate")}</Label>
-                          <Input
-                            id="expiry"
-                            placeholder="MM/YY"
-                            value={cardExpiry}
-                            onChange={(e) => setCardExpiry(formatExpiry(e.target.value))}
-                            maxLength={5}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="cvc">CVC/CVV</Label>
-                          <Input
-                            id="cvc"
-                            placeholder="123"
-                            value={cardCVC}
-                            onChange={(e) => setCardCVC(e.target.value.replace(/\D/g, ""))}
-                            maxLength={3}
-                          />
-                        </div>
-                      </div>
                       <div className="space-y-2">
-                        <Label htmlFor="phone">{t("phoneNumber")}</Label>
+                        <Label htmlFor="expiry">{t("expiryDate")}</Label>
                         <Input
-                          id="phone"
-                          placeholder="+998 90 123 45 67"
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
+                        id="expiry"
+                        placeholder="MM/YY"
+                        value={cardExpiry}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setCardExpiry(formatExpiry(e.target.value))
+                        }
+                        maxLength={5}
                         />
                       </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="cvc">CVC/CVV</Label>
+                        <Input
+                        id="cvc"
+                        placeholder="123"
+                        value={cardCVC}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setCardCVC(e.target.value.replace(/\D/g, ""))
+                        }
+                        maxLength={3}
+                        />
+                      </div>
+                      </div>
+                      <div className="space-y-2">
+                      <Label htmlFor="phone">{t("phoneNumber")}</Label>
+                      <Input
+                        id="phone"
+                        placeholder="+998 90 123 45 67"
+                        value={phoneNumber}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)}
+                      />
+                      </div>
                       <div className="pt-4">
-                        <Button className="w-full" onClick={handlePaymentSubmit} disabled={isProcessingPayment}>
-                          {isProcessingPayment ? t("processing") : t("payNow")}
-                        </Button>
+                      <Button
+                        className="w-full"
+                        onClick={handlePaymentSubmit}
+                        disabled={isProcessingPayment}
+                      >
+                        {isProcessingPayment ? t("processing") : t("payNow")}
+                      </Button>
                       </div>
                     </TabsContent>
 
                     <TabsContent value="click" className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="clickCardNumber">{t("cardNumber")}</Label>
-                        <Input
-                          id="clickCardNumber"
-                          placeholder="8600 0000 0000 0000"
-                          value={cardNumber}
-                          onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                          maxLength={19}
-                        />
+                      <Label htmlFor="clickCardNumber">{t("cardNumber")}</Label>
+                      <Input
+                        id="clickCardNumber"
+                        placeholder="8600 0000 0000 0000"
+                        value={cardNumber}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCardNumber(formatCardNumber(e.target.value))
+                        }
+                        maxLength={19}
+                      />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="clickExpiry">{t("expiryDate")}</Label>
-                          <Input
-                            id="clickExpiry"
-                            placeholder="MM/YY"
-                            value={cardExpiry}
-                            onChange={(e) => setCardExpiry(formatExpiry(e.target.value))}
-                            maxLength={5}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="clickPhone">{t("phoneNumber")}</Label>
-                          <Input
-                            id="clickPhone"
-                            placeholder="+998 90 123 45 67"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                          />
-                        </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="clickExpiry">{t("expiryDate")}</Label>
+                        <Input
+                        id="clickExpiry"
+                        placeholder="MM/YY"
+                        value={cardExpiry}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setCardExpiry(formatExpiry(e.target.value))
+                        }
+                        maxLength={5}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="clickPhone">{t("phoneNumber")}</Label>
+                        <Input
+                        id="clickPhone"
+                        placeholder="+998 90 123 45 67"
+                        value={phoneNumber}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)}
+                        />
+                      </div>
                       </div>
                       <div className="pt-4">
-                        <Button className="w-full" onClick={handlePaymentSubmit} disabled={isProcessingPayment}>
-                          {isProcessingPayment ? t("processing") : t("payNow")}
-                        </Button>
+                      <Button
+                        className="w-full"
+                        onClick={handlePaymentSubmit}
+                        disabled={isProcessingPayment}
+                      >
+                        {isProcessingPayment ? t("processing") : t("payNow")}
+                      </Button>
                       </div>
                     </TabsContent>
 
                     <TabsContent value="bank" className="space-y-4">
                       <div className="p-4 bg-muted rounded-lg">
-                        <h3 className="font-medium mb-2">{t("bankTransferInstructions")}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{t("bankTransferDescription")}</p>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("accountName")}:</span>
-                            <span>IT English Academy</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("accountNumber")}:</span>
-                            <span>1234 5678 9012 3456</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("bank")}:</span>
-                            <span>National Bank of Uzbekistan</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("reference")}:</span>
-                            <span>Order #{Math.floor(Math.random() * 10000)}</span>
-                          </div>
+                      <h3 className="font-medium mb-2">{t("bankTransferInstructions")}</h3>
+                      <p className="text-sm text-muted-foreground mb-4">{t("bankTransferDescription")}</p>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("accountName")}:</span>
+                        <span>IT English Academy</span>
+                        </div>
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("accountNumber")}:</span>
+                        <span>1234 5678 9012 3456</span>
+                        </div>
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("bank")}:</span>
+                        <span>National Bank of Uzbekistan</span>
+                        </div>
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("reference")}:</span>
+                        <span>Order #{Math.floor(Math.random() * 10000)}</span>
                         </div>
                       </div>
+                      </div>
                       <div className="pt-4">
-                        <Button className="w-full" onClick={handlePaymentSubmit} disabled={isProcessingPayment}>
-                          {isProcessingPayment ? t("processing") : t("confirmOrder")}
-                        </Button>
+                      <Button
+                        className="w-full"
+                        onClick={handlePaymentSubmit}
+                        disabled={isProcessingPayment}
+                      >
+                        {isProcessingPayment ? t("processing") : t("confirmOrder")}
+                      </Button>
                       </div>
                     </TabsContent>
 
                     <TabsContent value="cash" className="space-y-4">
                       <div className="p-4 bg-muted rounded-lg">
-                        <h3 className="font-medium mb-2">{t("cashPaymentInstructions")}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{t("cashPaymentDescription")}</p>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("address")}:</span>
-                            <span>123 IT Street, Tashkent</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("workingHours")}:</span>
-                            <span>9:00 - 18:00</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium">{t("orderNumber")}:</span>
-                            <span>#{Math.floor(Math.random() * 10000)}</span>
-                          </div>
+                      <h3 className="font-medium mb-2">{t("cashPaymentInstructions")}</h3>
+                      <p className="text-sm text-muted-foreground mb-4">{t("cashPaymentDescription")}</p>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("address")}:</span>
+                        <span>123 IT Street, Tashkent</span>
+                        </div>
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("workingHours")}:</span>
+                        <span>9:00 - 18:00</span>
+                        </div>
+                        <div className="flex justify-between">
+                        <span className="font-medium">{t("orderNumber")}:</span>
+                        <span>#{Math.floor(Math.random() * 10000)}</span>
                         </div>
                       </div>
+                      </div>
                       <div className="pt-4">
-                        <Button className="w-full" onClick={handlePaymentSubmit} disabled={isProcessingPayment}>
-                          {isProcessingPayment ? t("processing") : t("confirmOrder")}
-                        </Button>
+                      <Button
+                        className="w-full"
+                        onClick={handlePaymentSubmit}
+                        disabled={isProcessingPayment}
+                      >
+                        {isProcessingPayment ? t("processing") : t("confirmOrder")}
+                      </Button>
                       </div>
                     </TabsContent>
-                  </Tabs>
+                    </Tabs>
                 </CardContent>
               </Card>
             )}

@@ -98,7 +98,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
               },
               content: t("welcomeMessage"),
               timestamp: new Date(Date.now() - 86400000), // 1 day ago
-              type: "text"
+              type: "text" as "text" | "voice" | "video" | "image"
             },
             {
               id: 2,
@@ -110,7 +110,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
               },
               content: t("voiceMessageExample"),
               timestamp: new Date(Date.now() - 43200000), // 12 hours ago
-              type: "voice",
+              type: "voice" as "text" | "voice" | "video" | "image",
               mediaUrl: "/placeholder.svg?height=40&width=200",
               duration: 15
             }
@@ -127,7 +127,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
           setGroupMessages(convertDates(parsedMessages))
         } else {
           // Default messages if none in storage
-          const defaultGroupMessages = [
+          const defaultGroupMessages: Message[] = [
             {
               id: 1,
               sender: {
@@ -138,7 +138,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
               },
               content: t("groupWelcomeMessage"),
               timestamp: new Date(Date.now() - 172800000), // 2 days ago
-              type: "text"
+              type: "text" as "text"
             },
             {
               id: 2,
@@ -149,7 +149,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
               },
               content: t("week3AssignmentQuestion"),
               timestamp: new Date(Date.now() - 86400000), // 1 day ago
-              type: "text"
+              type: "text" as "text"
             },
             {
               id: 3,
@@ -161,7 +161,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
               },
               content: t("assignmentSubmissionInstructions"),
               timestamp: new Date(Date.now() - 82800000), // 23 hours ago
-              type: "text"
+              type: "text" as "text"
             },
             {
               id: 4,
@@ -173,7 +173,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
               },
               content: "",
               timestamp: new Date(Date.now() - 72800000), // 20 hours ago
-              type: "voice",
+              type: "voice" as "voice",
               mediaUrl: "/placeholder.svg?height=40&width=200",
               duration: 25
             }
