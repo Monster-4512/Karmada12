@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Responsive text sizes */
+  h1 {
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+  }
+  h2 {
+    @apply text-xl md:text-2xl lg:text-3xl font-bold;
+  }
+  h3 {
+    @apply text-lg md:text-xl font-bold;
+  }
+  h4 {
+    @apply text-base md:text-lg font-semibold;
+  }
+  p,
+  li,
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    @apply text-sm md:text-base;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.7);
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Mobile menu styles */
+.mobile-menu-container {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms, visibility 200ms;
+}
+
+.mobile-menu-container.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  background-color: hsl(var(--background));
+  padding: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateX(-100%);
+  transition: transform 200ms;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: hsl(var(--foreground) / 0.2);
+  backdrop-filter: blur(4px);
+}
+
+/* Language transition effect */
+.lang-transition {
+  transition: opacity 0.3s ease-out;
+}
+
+.lang-transition-enter {
+  opacity: 0;
+}
+
+.lang-transition-enter-active,
+.lang-transition-exit {
+  opacity: 1;
+}
+
+.lang-transition-exit-active {
+  opacity: 0;
+}
+
+/* Fade in animation */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  /* Responsive spacing */
+  .container {
+    @apply px-2 sm:px-4;
+  }
+
+  .section-padding {
+    @apply py-4 md:py-8 lg:py-12;
+  }
+
+  /* Compact UI elements */
+  .compact-card {
+    @apply p-2 sm:p-4;
+  }
+
+  .compact-button {
+    @apply py-1 px-2 text-xs sm:py-2 sm:px-3 sm:text-sm;
+  }
+
+  .compact-input {
+    @apply py-1 px-2 text-xs sm:py-2 sm:px-3 sm:text-sm;
+  }
+
+  .compact-table th,
+  .compact-table td {
+    @apply py-1 px-2 text-xs sm:py-2 sm:px-3 sm:text-sm;
+  }
+
+  /* Admin panel specific */
+  .admin-content {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+
+  .admin-card {
+    @apply p-2 sm:p-4;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    @apply py-1 px-2 text-xs sm:py-2 sm:px-3 sm:text-sm;
+  }
+}
+
