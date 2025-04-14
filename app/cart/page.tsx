@@ -79,7 +79,7 @@ export default function CartPage() {
   }, [cartItems])
 
   const handleRemoveItem = (id: number) => {
-    setCartItems(cartItems.filter((item) => item.id !== id))
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id))
     toast({
       title: t("itemRemoved"),
       description: t("itemRemovedFromCart"),
@@ -409,7 +409,7 @@ export default function CartPage() {
                         <span className="hidden sm:inline">{t("card")}</span>
                       </TabsTrigger>
                       <TabsTrigger value="click">
-                        <img src="/placeholder.svg?height=16&width=16" alt="Click" className="h-4 w-4 mr-2" />
+                        <img src="/placeholder.svg" alt="Click" className="h-4 w-4 mr-2" />
                         <span className="hidden sm:inline">Click</span>
                       </TabsTrigger>
                       <TabsTrigger value="bank">
