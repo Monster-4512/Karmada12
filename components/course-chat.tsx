@@ -336,7 +336,7 @@ export default function CourseChat({ courseId, courseTitle }: { courseId: number
 
       // Save to localStorage
       localStorage.setItem("privateMessages", JSON.stringify(updatedMessages))
-    } 
+    });
   }
 
   return (
